@@ -20,13 +20,13 @@ def add_layer(inputs, in_size, out_size, w_n,b_n,activation_function=None):
 
 
 
-data1 = scipy.io.loadmat('D:/train.mat')  
+data1 = scipy.io.loadmat('train.mat')  
 x=data1['x']
 y=data1['y']
 z=data1['z']
 x_data=np.hstack((x,y))
 y_data=z
-data1 = scipy.io.loadmat('D:/test.mat')  
+data1 = scipy.io.loadmat('test.mat')  
 x=data1['x']
 y=data1['y']
 z=data1['z']
@@ -65,7 +65,7 @@ sess = tf.Session()
 sess.run(init)
 
 # 迭代 1000 次学习，sess.run optimizer
-for i in range(200000):
+for i in range(2):
     # training train_step 和 loss 都是由 placeholder 定义的运算，所以这里要用 feed 传入参数
     sess.run(train_step, feed_dict={xs: x_data, ys: y_data})
     if i % 200 == 0:
@@ -77,6 +77,6 @@ saver=tf.train.Saver(max_to_keep=1)
 saver.save(sess,'c/mnist',global_step=0)
 reader = tf.train.NewCheckpointReader('c/mnist-0')
 all_variables = reader.get_variable_to_shape_map()
-dataNew = 'D://outcome.mat'
+dataNew = 'outcome.mat'
 scipy.io.savemat(dataNew, {'b1': reader.get_tensor('b1'),'w1': reader.get_tensor('w1'),'b2': reader.get_tensor('b2'),'w2': reader.get_tensor('w2'),'b3': reader.get_tensor('b3'),'w3': reader.get_tensor('w3'),'b4': reader.get_tensor('b4'),'w4': reader.get_tensor('w4'),'b5': reader.get_tensor('b5'),'w5': reader.get_tensor('w5')})
 print('finish!')
