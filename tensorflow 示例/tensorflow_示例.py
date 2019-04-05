@@ -65,7 +65,7 @@ sess = tf.Session()
 sess.run(init)
 
 # 迭代 1000 次学习，sess.run optimizer
-for i in range(2):
+for i in range(3):
     # training train_step 和 loss 都是由 placeholder 定义的运算，所以这里要用 feed 传入参数
     sess.run(train_step, feed_dict={xs: x_data, ys: y_data})
     if i % 200 == 0:
